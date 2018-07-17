@@ -48,7 +48,7 @@ class Errors extends Component {
     }
 
     referenceError() {
-        var a = 10;
+        var a = undefinedVariable;
     }
 
     rangeError() {
