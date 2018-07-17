@@ -40,7 +40,7 @@ class Errors extends Component {
     }
 
     typeError() {
-       // null.f();
+       null.f();
     }
 
     syntaxError() {
