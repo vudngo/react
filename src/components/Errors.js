@@ -6,12 +6,6 @@ import logo from '../assets/sentry-glyph-black.png';
 
 class Errors extends Component {
 
-    componentDidMount() {
-        Raven.setTagsContext({
-            feature: "frontend"
-        });
-    }
-
     constructor(props) {
         super(props);
         this.state = {color: 'black', email: '', submitted_email: ''};
