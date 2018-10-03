@@ -16,5 +16,5 @@ associate_commits:
 	sentry-cli releases -o $(SENTRY_ORG) -p $(SENTRY_PROJECT) set-commits --auto $(VERSION)
 
 upload_sourcemaps:
-	sentry-cli releases -o $(SENTRY_ORG) -p $(SENTRY_PROJECT) files \
-		$(VERSION) upload-sourcemaps --url-prefix "~/$(PREFIX)" --validate build/$(PREFIX)
+	sentry-cli releases -o $(SENTRY_ORG) -p $(SENTRY_PROJECT) files $(VERSION) \
+		upload-sourcemaps --url-prefix "~/$(PREFIX)" --validate build/$(PREFIX)

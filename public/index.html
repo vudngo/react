@@ -26,32 +26,15 @@
     -->
   <title>Sentry Demo</title>
 
-  <script src="https://cdn.ravenjs.com/3.22.1/raven.min.js" crossorigin="anonymous"></script>
+  <!-- Import SDK -->
+  <script src="https://browser.sentry-cdn.com/4.0.5/bundle.min.js" crossorigin="anonymous"></script>
+
+  <!-- Configure SDK -->
   <script>
-    Raven.config('https://bc15257174a54e27808f71e5fe09cd75@sentry.io/1231289', {
-      release: "%REACT_APP_RELEASE%",
-      allowDuplicates: true
-    }).install().noConflict();
-  
-    //allowDumplicates to allow the same error to be sent back-to-back
-    //noConflict to allow multiple projects on the same page
-
-
-    //Add Custom Tags
-    Raven.setTagsContext({
-      id: '902834029842',
-      userType: 'enterprise'
-    })
-
-    //override console.log to stringify objects before logging. 
-    //Allows Raven to capture the object's content
-    oldConsoleLog = console.log;
-    console.log = function (arg) { 
-      if (typeof(arg) === 'object') 
-        { oldConsoleLog(JSON.stringify(arg)); } 
-      else 
-        { oldConsoleLog(JSON.stringify(arg));} 
-    }
+    Sentry.init({
+      dsn: 'https://bc15257174a54e27808f71e5fe09cd75@sentry.io/1231289',
+      release: "%REACT_APP_RELEASE%"
+    });
   </script>
 
 </head>
