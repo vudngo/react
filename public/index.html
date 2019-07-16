@@ -28,14 +28,11 @@
   <!-- Configure SDK -->
   <script>
     Sentry.init({
-      dsn: 'https://f3e1b754a04b4dc1be1b54454ec6d238@sentry.io/1356467',
+      dsn: 'https://4d5719e908674b4d9bc4d497eb33616a@sentry.io/1326318',
+      //dsn: 'http://40f9f10634de4ad5963a20da83fc56ca@localhost:9000/2',
       release: "%REACT_APP_RELEASE%",
-      environment: "prod",
-      beforeSend(event) {
-        // Check if it is an exception, if so, show the report dialog
-        if (event.exception) {
-          Sentry.showReportDialog();
-        }
+      beforeSend(event, hints) {
+        //event.fingerprint = [event.exception.values[0].type, event.exception.values[0].value, (new Date).getTime()]; 
         return event;
       }
     });

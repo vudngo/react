@@ -62,9 +62,26 @@ class App extends Component {
       defaultError(error);
     };
     // Add context to error/event
+    var environment, customerType = "";
+    switch(Math.floor(Math.random() * 100) % 2) {
+      case 0:
+        customerType = "business"
+        environment  = "staging"
+        break;
+      case 1:
+        customerType = "enterprise"
+        environment  = "production"
+        break;
+      default:
+        customerType = "business"
+        environment  = "production" 
+    }
+
+
     Sentry.configureScope(scope => {
       scope.setUser({ email: this.email }); // attach user/email context
-      scope.setTag("customerType", "medium-plan"); // custom-tag
+      scope.setTag("customerType", customerType); // custom-tag
+      scope.setTag("environment", environment); // custom-tag      
     });
   }
 
@@ -99,7 +116,8 @@ class App extends Component {
   }
 
   checkout() {
-    this.myCodeIsPerfect();
+    //trigger an error: "Uncaught TypeError: this.myCodeIsPerfect is not a function"
+    //this.myCodeIsPerfect();
 
     /*
       POST request to /checkout endpoint.
@@ -119,7 +137,7 @@ class App extends Component {
 
     // perform request (set transctionID as header and throw error appropriately)
     request.post({
-        url: "http://localhost:3001/checkout",
+        url: "http://localhost:8080/checkout",
         json: order,
         headers: {
           "X-Session-ID": this.sessionId,
@@ -132,7 +150,7 @@ class App extends Component {
         if (response.statusCode === 200) {
           this.setState({ success: true });
         } else {
-          throw new Error(response.statusCode + " - " + response.statusMessage);
+          throw new Error(response.statusCode + ": Failed to checkout" );
         }
       }
     );
