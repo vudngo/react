@@ -62,25 +62,25 @@ class App extends Component {
       defaultError(error);
     };
     // Add context to error/event
-    var environment, customerType = "";
+    var environment, customer_type = "";
     switch(Math.floor(Math.random() * 100) % 2) {
       case 0:
-        customerType = "business"
+        customer_type = "business"
         environment  = "staging"
         break;
       case 1:
-        customerType = "enterprise"
+        customer_type = "enterprise"
         environment  = "production"
         break;
       default:
-        customerType = "business"
+        customer_type = "business"
         environment  = "production" 
     }
 
 
     Sentry.configureScope(scope => {
       scope.setUser({ email: this.email }); // attach user/email context
-      scope.setTag("customerType", customerType); // custom-tag
+      scope.setTag("customer_type", customer_type); // custom-tag
       scope.setTag("environment", environment); // custom-tag      
     });
   }
