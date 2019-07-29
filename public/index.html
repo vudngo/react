@@ -25,12 +25,16 @@
   <!-- Import SDK -->
   <script src="https://browser.sentry-cdn.com/5.5.0/bundle.min.js" crossorigin="anonymous"></script>
 
+  <!-- Import A Pluggable Integration -->
+  <script src="https://browser.sentry-cdn.com/5.5.0/captureconsole.min.js" crossorigin="anonymous"></script>
+  
   <!-- Configure SDK -->
   <script>
     Sentry.init({
       dsn: 'https://4d5719e908674b4d9bc4d497eb33616a@sentry.io/1326318',
       release: "%REACT_APP_RELEASE%",
-      whitelistUrls: ['/static/js/main.'],
+      //Configure an integration
+      integrations: [new Sentry.Integrations.CaptureConsole({ levels: ['log', 'info', 'warn', 'error', 'debug', 'assert']})],
       beforeSend(event, hints) {
         //add custom logic here (eg. setting custom fingerprint)
         //event.fingerprint = [event.exception.values[0].type, event.exception.values[0].value, (new Date).getTime()]; 
