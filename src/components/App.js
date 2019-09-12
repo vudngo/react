@@ -117,7 +117,7 @@ class App extends Component {
 
   checkout() {
     //trigger an error: "Uncaught TypeError: this.myCodeIsPerfect is not a function"
-    //this.myCodeIsPerfect();
+    this.myCodeIsPerfect();
 
     /*
       POST request to /checkout endpoint.
