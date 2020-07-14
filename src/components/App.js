@@ -117,8 +117,15 @@ class App extends Component {
 
   checkout() {
     //trigger an error: "Uncaught TypeError: this.myCodeIsPerfect is not a function"
-    this.myCodeIsPerfect();
-
+    //this.myCodeIsPerfect();
+    //this.aFunctionThatMightFail();
+    
+    try {
+      this.aFunctionThatMightFail();
+    } catch (err) {
+      throw new Error("aFunctionThatMightFail failed");
+      //Sentry.captureException(err);
+    }
     /*
       POST request to /checkout endpoint.
         - Custom header with transactionId for transaction tracing
@@ -137,7 +144,7 @@ class App extends Component {
 
     // perform request (set transctionID as header and throw error appropriately)
     request.post({
-        url: "http://localhost:8080/checkout",
+        url: "http://localhost:3002/checkout",
         json: order,
         headers: {
           "X-Session-ID": this.sessionId,
